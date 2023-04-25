@@ -60,70 +60,79 @@ def is_valid_move(x, y):
     # The move is valid
     return True
 
-# Define a function to check if a player has formed a five-in-a-row
+# Define a function to check if a player has formed a five-in-a-row and turn the stones into asterisks
 def has_five_in_a_row(symbol):
-    # Check horizontal lines
-    for i in range(board_size):
-        count = 0
-        for j in range(board_size):
-            if board[i][j] == symbol:
-                count += 1
-            else:
-                count = 0
-            if count == 5:
-                return True
-
-    # Check vertical lines
+  # Check horizontal lines
+  for i in range(board_size):
+    count = 0
     for j in range(board_size):
+      if board[i][j] == symbol:
+        count += 1
+      else:
         count = 0
-        for i in range(board_size):
-            if board[i][j] == symbol:
-                count += 1
-            else:
-                count = 0
-            if count == 5:
-                return True
-
-    # Check diagonal lines (top-left to bottom-right)
-    for k in range(2 * board_size - 1):
+      if count == 5:
+        # Turn the stones into asterisks
+        for k in range(j - 4, j + 1):
+          board[i][k] = "*"
+        return True
+  # Check vertical lines
+  for j in range(board_size):
+    count = 0
+    for i in range(board_size):
+      if board[i][j] == symbol:
+        count += 1
+      else:
         count = 0
-        if k < board_size:
-            i = k
-            j = 0
-        else:
-            i = board_size - 1
-            j = k - board_size + 1
-        while i >= 0 and j < board_size:
-            if board[i][j] == symbol:
-                count += 1
-            else:
-                count = 0
-            if count == 5:
-                return True
-            i -= 1
-            j += 1
-
-    # Check diagonal lines (bottom-left to top-right)
-    for k in range(2 * board_size - 1):
+      if count == 5:
+        # Turn the stones into asterisks
+        for k in range(i - 4, i + 1):
+          board[k][j] = "*"
+        return True
+  # Check diagonal lines (top-left to bottom-right)
+  for k in range(2 * board_size - 1):
+    count = 0
+    if k < board_size:
+      i = k
+      j = 0
+    else:
+      i = board_size - 1
+      j = k - board_size + 1
+    while i >= 0 and j < board_size:
+      if board[i][j] == symbol:
+        count += 1
+      else:
         count = 0
-        if k < board_size:
-            i = board_size - k - 1
-            j = 0
-        else:
-            i = 0
-            j = k - board_size + 1
-        while i < board_size and j < board_size:
-            if board[i][j] == symbol:
-                count += 1
-            else:
-                count = 0
-            if count == 5:
-                return True
-            i += 1
-            j += 1
+      if count == 5:
+        # Turn the stones into asterisks
+        for l in range(5):
+          board[i - l][j + l] = "*"
+        return True
+      i -= 1
+      j += 1
+  # Check diagonal lines (bottom-left to top-right)
+  for k in range(2 * board_size - 1):
+    count = 0
+    if k < board_size:
+      i = board_size - k - 1
+      j = 0
+    else:
+      i = 0
+      j = k - board_size + 1
+    while i < board_size and j < board_size:
+      if board[i][j] == symbol:
+        count += 1
+      else:
+        count = 0
+      if count == 5:
+        # Turn the stones into asterisks
+        for l in range(5):
+          board[i + l][j + l] = "*"
+        return True
+      i += 1
+      j += 1
+  # No five-in-a-row found
+  return False
 
-    # No five-in-a-row found
-    return False
 
 # Define a function to check if a player has dismantled a bomb
 def has_dismantled_bomb():
