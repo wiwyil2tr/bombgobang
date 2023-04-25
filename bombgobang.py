@@ -161,11 +161,11 @@ def declare_winner():
 
     # Compare the scores
     if remaining_bombs != 0:
-        print("Time Up! The bombs are exploded. You all lost!")
+        print("Time Up! Bomb Exploded! You All Lost!")
     elif scores[0] > scores[1]:
-        print("X wins!")
+        print("X Wins! Congratulations!")
     elif scores[0] < scores[1]:
-        print("O wins!")
+        print("O Wins! Congratulations!")
     else:
         print("It's a tie!")
 
