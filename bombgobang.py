@@ -3,7 +3,7 @@ import random
 import time
 
 # Define the board size
-board_size = 15
+board_size = int(input("Enter the board size: (example:15) "))
 
 # Create an empty board
 board = [[" " for _ in range(board_size)] for _ in range(board_size)]
@@ -31,7 +31,7 @@ scores = [0, 0]
 # Define a function to print the board
 def print_board():
     # Print the column numbers
-    print("   ", end="")
+    print("  ", end="")
     for i in range(board_size):
         print(f"{i:2d}", end=" ")
     print()
@@ -40,7 +40,7 @@ def print_board():
     for i in range(board_size):
         print(f"{i:2d} ", end="")
         for j in range(board_size):
-            print(f"{board[i][j]} ", end="")
+            print(f"{board[i][j]} ", end=" ")
         print()
 
     # Print the scores and the remaining bombs
