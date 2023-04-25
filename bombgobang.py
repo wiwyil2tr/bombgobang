@@ -10,7 +10,7 @@ board = [[" " for _ in range(board_size)] for _ in range(board_size)]
 
 # Get the number of bombs and the time limit from the player
 print("Welcome to Bomb Gobang!")
-print("Game Rules: There are a total of a number of bombs in the game. Both players must dismantle them all within a number of minutes, otherwise the bomb will explode, and they will all fail. At the beginning, the player should input the bombs number and the time limit. A bomb will be dismantled every time a five-in-a-row is formed. The winner is the one who dismantles the most bombs. ")
+print("Game Rules: There are a total of a number of bombs in the game. Both players must dismantle them all within a number of minutes, otherwise the bomb will explode, and both players will lose. At the beginning, the player should input the bombs number and the time limit. A bomb will be dismantled every time a five-in-a-row is formed. The winner is the one who dismantles the most bombs. ")
 print("The goal is to dismantle as many bombs as possible by forming five-in-a-row.")
 print("The bombs are hidden and will be revealed when dismantled.")
 bomb_num = int(input("Enter the number of bombs: "))
@@ -155,11 +155,14 @@ def is_game_over():
 
 # Define a function to declare the winner (or a tie)
 def declare_winner():
+    
     # Print the final board
     print_board()
 
     # Compare the scores
-    if scores[0] > scores[1]:
+    if remaining_bombs != 0:
+        print("Time Up! The bombs are exploded. You all lost!")
+    elif scores[0] > scores[1]:
         print("X wins!")
     elif scores[0] < scores[1]:
         print("O wins!")
